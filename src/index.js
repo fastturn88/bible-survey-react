@@ -1,18 +1,21 @@
-import React from 'react';
+import React from "react";
 import { createRoot } from "react-dom/client";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import reportWebVitals from './reportWebVitals';
-import Basic from './basic/Basic';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import App from './App';
-import MultipleChoice from './multipleChoice/MultipleChoice';
-import Card from './card/Card';
-import CardWithFeedback from './cardWithFeedback/CardWithFeedback';
-import Modal from './modal/Modal';
-import Rating from './rating/Rating';
-import Scale from './scale/Scale';
-import Ranking from './ranking/Ranking';
-import Range from './range/Range';
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import reportWebVitals from "./reportWebVitals";
+import Basic from "./components/basic/Basic";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import App from "./App";
+import MultipleChoice from "./components/multipleChoice/MultipleChoice";
+import Card from "./components/card/Card";
+import CardWithFeedback from "./components/cardWithFeedback/CardWithFeedback";
+import Modal from "./components/modal/Modal";
+import Rating from "./components/rating/Rating";
+import Scale from "./components/scale/Scale";
+import Ranking from "./components/ranking/Ranking";
+import Range from "./components/range/Range";
+
+import BeforePage from "./pages/before";
+import MainPage from "./pages/main";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -22,6 +25,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/before" element={<BeforePage />} />
+        <Route path="/main/:lang/:section" element={<MainPage />} />
+
         <Route path="/basic" element={<Basic />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />
         <Route path="/card" element={<Card />} />
