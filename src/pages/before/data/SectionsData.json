@@ -1,0 +1,7 @@
+[
+  { "value": "1-5", "label": "Pentateuch" },
+  { "value": "6-17", "label": "History Books" },
+  { "value": "18-22", "label": "Writings" },
+  { "value": "23-39", "label": "Prophets" },
+  { "value": "40-66", "label": "New Testament" }
+]

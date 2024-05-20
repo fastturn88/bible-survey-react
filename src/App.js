@@ -1,37 +1,28 @@
-import { MDBBtn, MDBContainer } from "mdb-react-ui-kit";
+import { MDBBtn, MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./App.css";
+
 export default function App() {
   return (
-    <MDBContainer>
-      <Link to="/basic">
-        <MDBBtn className="m-3">Basic</MDBBtn>
-      </Link>
-      <Link to="/multiple-choice">
-        <MDBBtn className="m-3">Multiple choice</MDBBtn>
-      </Link>
-      <Link to="/card">
-        <MDBBtn className="m-3">Survey within a card</MDBBtn>
-      </Link>
-      <Link to="/card-with-feedback">
-        <MDBBtn className="m-3">Customer satisfaction survey</MDBBtn>
-      </Link>
-      <Link to="/modal">
-        <MDBBtn className="m-3">Modal survey</MDBBtn>
-      </Link>
-      <Link to="/rating">
-        <MDBBtn className="m-3">Rating survey</MDBBtn>
-      </Link>
-      <Link to="/scale">
-        <MDBBtn className="m-3">Linear scale survey</MDBBtn>
-      </Link>
-      <Link to="/ranking">
-        <MDBBtn className="m-3">Ranking survey</MDBBtn>
-      </Link>
-      <Link to="/range">
-        <MDBBtn className="m-3">Range survey</MDBBtn>
-      </Link>
+    <MDBContainer fluid className="start-page ">
+      <MDBRow className="start-page-main">
+        <MDBCol className="start-page-title" md={7} sm={12}>
+          <div>
+            <div className="">B i b l e</div>
+            <div className="">V e r s e</div>
+            <div className="">M a s t e r</div>
+          </div>
+        </MDBCol>
+        <MDBCol md={1} sm={12}></MDBCol>
+        <MDBCol className="d-flex align-items-center" md={4} sm={12}>
+          <Link to="/before">
+            <div className="start-page-content">S T A R T</div>
+            {/* <MDBBtn className="m-3 ">START</MDBBtn> */}
+          </Link>
+        </MDBCol>
+      </MDBRow>
     </MDBContainer>
   );
 }
