@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { MDBBtn, MDBContainer, MDBTypography } from "mdb-react-ui-kit";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 import LANG_DATA from "./data/LanguagesData.json";
 import SECTION_DATA from "./data/SectionsData.json";
 
 import "./styles.css";
 
-export default function Before() {
+export default function Before(props) {
   const [versionOptions, setVersionOptions] = useState([]);
 
   const [selectedLanguage, setSelectedLanguage] = useState({});
   const [selectedVersion, setSelectedVersion] = useState({});
   const [selectedSection, setSelectedSection] = useState({});
-
-  const [errorMsg, setErrorMsg] = useState({
-    language: "",
-    version: "",
-    section: "",
-  });
 
   useEffect(() => {
     // const temp = LANG_DATA.map();
@@ -35,10 +30,9 @@ export default function Before() {
     });
   }, []);
 
+  const navigate = useNavigate();
   const onStart = () => {
-    if (!selectedLanguage) {
-      setErrorMsg;
-    }
+    navigate(`/main/${selectedVersion.short_name}/${selectedSection.value}`);
   };
 
   return (
@@ -108,7 +102,17 @@ export default function Before() {
       )}
 
       <div className="text-center">
-        <MDBBtn type="submit" onClick={onStart}>
+        <MDBBtn
+          type="submit"
+          onClick={onStart}
+          disabled={
+            !(
+              selectedLanguage.language &&
+              selectedVersion.short_name &&
+              selectedSection.value
+            )
+          }
+        >
           Start!
         </MDBBtn>
       </div>
