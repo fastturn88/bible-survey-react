@@ -17,9 +17,13 @@ export default function Before(props) {
 
   useEffect(() => {
     // const temp = LANG_DATA.map();
+    const previewLang = localStorage.getItem("language");
     setSelectedLanguage({
-      language: localStorage.getItem("language"),
+      language: previewLang,
     });
+    setVersionOptions(
+      LANG_DATA.find((one) => one.language == previewLang).translations
+    );
     setSelectedVersion({
       short_name: localStorage.getItem("version-short"),
       full_name: localStorage.getItem("version-full"),
