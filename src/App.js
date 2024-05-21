@@ -1,4 +1,4 @@
-import { MDBBtn, MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,10 @@ export default function App() {
         <MDBCol md={1} sm={12}></MDBCol>
         <MDBCol className="d-flex align-items-center" md={4} sm={12}>
           <Link to="/before">
-            <div className="start-page-content">S T A R T</div>
+            <div className="start-page-content">
+              S T A R T
+              <MDBIcon fas className="ms-3" icon="arrow-right" />
+            </div>
             {/* <MDBBtn className="m-3 ">START</MDBBtn> */}
           </Link>
         </MDBCol>

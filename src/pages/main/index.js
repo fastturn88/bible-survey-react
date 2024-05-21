@@ -28,7 +28,7 @@ import BooksData from "src/consts/BooksData.json";
 let bookRange = [];
 let bookId, chapterRange, chapterId, verseId;
 
-const PROBLEM_NUM = 3;
+const PROBLEM_NUM = 10;
 
 export default function Main() {
   const { lang, section } = useParams();
@@ -243,7 +243,7 @@ export default function Main() {
                             id={one.bookid}
                             label={one.name}
                             onChange={(_, e) => {
-                              console.log("1111", one.bookid, bookId);
+                              // console.log("1111", one.bookid, bookId);
                               setSelectedOption(one.bookid);
                             }}
                             value={one.bookid}
@@ -279,7 +279,7 @@ export default function Main() {
                               id={index + 1}
                               label={`Chapter ${index + 1}`}
                               onChange={() => {
-                                console.log("2222", index + 1, chapterId);
+                                // console.log("2222", index + 1, chapterId);
                                 setSelectedOption(index + 1);
                               }}
                               value={index + 1}
@@ -311,7 +311,7 @@ export default function Main() {
                             id={one.verse}
                             label={one.text}
                             onChange={() => {
-                              console.log("333333", one.verse, verseId);
+                              // console.log("333333", one.verse, verseId);
                               setSelectedOption(one.verse);
                             }}
                             value={one.verse}
