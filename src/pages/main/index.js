@@ -28,6 +28,8 @@ import BooksData from "src/consts/BooksData.json";
 let bookRange = [];
 let bookId, chapterRange, chapterId, verseId;
 
+const PROBLEM_NUM = 3;
+
 export default function Main() {
   const { lang, section } = useParams();
   const navigate = useNavigate();
@@ -100,6 +102,14 @@ export default function Main() {
         }, 1000);
       } else {
         setAnswerStatus(2);
+        if (questionNumber == PROBLEM_NUM) {
+          handleNewModal(
+            "exclamation",
+            "info",
+            `The total Score is ${totalPoints}`
+          );
+          return;
+        }
       }
     } else if (questionType == 1) {
       if (selectedOption == chapterId) {
@@ -116,6 +126,14 @@ export default function Main() {
         }, 1000);
       } else {
         setAnswerStatus(2);
+        if (questionNumber == PROBLEM_NUM) {
+          handleNewModal(
+            "exclamation",
+            "info",
+            `The total Score is ${totalPoints}`
+          );
+          return;
+        }
       }
     } else {
       if (selectedOption == verseId) {
@@ -126,13 +144,30 @@ export default function Main() {
         setTotalPoints(totalPoints + 1);
 
         setAnswerStatus(1);
+
+        if (questionNumber == PROBLEM_NUM) {
+          handleNewModal(
+            "exclamation",
+            "info",
+            `The total Score is ${totalPoints + 1}`
+          );
+          return;
+        }
       } else {
         setAnswerStatus(2);
+        if (questionNumber == PROBLEM_NUM) {
+          handleNewModal(
+            "exclamation",
+            "info",
+            `The total Score is ${totalPoints}`
+          );
+          return;
+        }
       }
     }
   };
   const handleNext = () => {
-    if (questionNumber == 10) {
+    if (questionNumber == PROBLEM_NUM) {
       handleNewModal(
         "exclamation",
         "info",
@@ -208,6 +243,7 @@ export default function Main() {
                             id={one.bookid}
                             label={one.name}
                             onChange={(_, e) => {
+                              console.log("1111", one.bookid, bookId);
                               setSelectedOption(one.bookid);
                             }}
                             value={one.bookid}
@@ -243,6 +279,7 @@ export default function Main() {
                               id={index + 1}
                               label={`Chapter ${index + 1}`}
                               onChange={() => {
+                                console.log("2222", index + 1, chapterId);
                                 setSelectedOption(index + 1);
                               }}
                               value={index + 1}
@@ -274,6 +311,7 @@ export default function Main() {
                             id={one.verse}
                             label={one.text}
                             onChange={() => {
+                              console.log("333333", one.verse, verseId);
                               setSelectedOption(one.verse);
                             }}
                             value={one.verse}
@@ -306,24 +344,46 @@ export default function Main() {
                     >
                       Restart
                     </MDBBtn>
-                    {answerStatus ? (
-                      <MDBBtn
-                        outline
-                        className="mx-2"
-                        color="info"
-                        onClick={handleNext}
-                      >
-                        Next Question
-                      </MDBBtn>
-                    ) : (
-                      <MDBBtn
-                        outline
-                        className="mx-2"
-                        onClick={handleSubmitAnswer}
-                      >
-                        Submit Answer
-                      </MDBBtn>
-                    )}
+                    <MDBBtn
+                      outline
+                      className="mx-2"
+                      onClick={handleSubmitAnswer}
+                      style={
+                        !answerStatus
+                          ? { visibility: "visible" }
+                          : { visibility: "hidden" }
+                      }
+                    >
+                      Submit Answer
+                    </MDBBtn>
+                    <MDBBtn
+                      outline
+                      className="mx-2"
+                      color="info"
+                      onClick={handleNext}
+                      style={
+                        answerStatus && questionNumber != PROBLEM_NUM
+                          ? { visibility: "visible" }
+                          : { visibility: "hidden" }
+                      }
+                    >
+                      Next Question
+                    </MDBBtn>
+                    <MDBBtn
+                      outline
+                      className="mx-2"
+                      color="secondary"
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                      style={
+                        answerStatus && questionNumber == PROBLEM_NUM
+                          ? { visibility: "visible" }
+                          : { visibility: "hidden" }
+                      }
+                    >
+                      Homepage
+                    </MDBBtn>
                   </div>
                 </MDBCardFooter>
               </div>
