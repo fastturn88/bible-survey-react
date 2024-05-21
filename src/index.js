@@ -20,6 +20,8 @@ import MainPage from "./pages/main";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
+import "./index.css";
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>

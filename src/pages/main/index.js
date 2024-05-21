@@ -5,6 +5,7 @@ import {
   MDBBtn,
   MDBContainer,
   MDBCard,
+  MDBIcon,
   MDBCardHeader,
   MDBCardBody,
   MDBCardTitle,
@@ -12,11 +13,9 @@ import {
   MDBCardFooter,
   MDBRadio,
   MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
   MDBModalBody,
+  MDBModalContent,
+  MDBModalDialog,
   MDBModalFooter,
   MDBSpinner,
 } from "mdb-react-ui-kit";
@@ -26,10 +25,6 @@ import getRandomNumber from "src/libs/getRandomNumber";
 
 import BooksData from "src/consts/BooksData.json";
 
-import "./styles.css";
-
-const questions = Array(10).fill({});
-
 let bookRange = [];
 let bookId, chapterRange, chapterId, verseId;
 
@@ -37,11 +32,13 @@ export default function Main() {
   const { lang, section } = useParams();
   const navigate = useNavigate();
 
-  const [isBrowser, setIsBrowser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [cardLoading, setCardLoading] = useState(false);
 
-  const [visibleModal, setVisibleModal] = useState(true);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [modalIcon, setModalIcon] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalColor, setModalColor] = useState("");
 
   const [randomVerse, setRandomVerse] = useState([]);
 
@@ -55,6 +52,14 @@ export default function Main() {
   const [questionType, setQuestionType] = useState(0); // 0: book, 1: chapter, 2: verse
 
   const [selectedOption, setSelectedOption] = useState("");
+
+  const handleNewModal = (icon, color, title) => {
+    setModalColor(color);
+    setModalIcon(icon);
+    setModalTitle(title);
+
+    setVisibleModal(true);
+  };
 
   const getQuestion = async () => {
     bookRange = section.split("-").map((one) => +one);
@@ -80,6 +85,10 @@ export default function Main() {
   };
 
   const handleSubmitAnswer = () => {
+    if (!selectedOption) {
+      handleNewModal("exclamation-triangle", "warning", "Select the option");
+      return;
+    }
     if (questionType == 0) {
       if (selectedOption == bookId) {
         setQuestionType(1);
@@ -89,11 +98,8 @@ export default function Main() {
         setTimeout(() => {
           setCardLoading(false);
         }, 1000);
-
-        console.log("@@@@@  ", bookId);
       } else {
         setAnswerStatus(2);
-        console.log("#####", bookId);
       }
     } else if (questionType == 1) {
       if (selectedOption == chapterId) {
@@ -101,36 +107,39 @@ export default function Main() {
         setSelectedOption("");
         setCardLoading(true);
 
-        setVisibleModal(true);
+        handleNewModal("checked", "success", "You scored 1 point.");
+
         setTotalPoints(totalPoints + 1);
 
         setTimeout(() => {
           setCardLoading(false);
         }, 1000);
-
-        console.log("&&&&&&", chapterId);
       } else {
         setAnswerStatus(2);
-        console.log("#####", chapterId);
       }
     } else {
       if (selectedOption == verseId) {
         setQuestionType(2);
-        setSelectedOption("");
-        setCardLoading(true);
 
-        setTimeout(() => {
-          setCardLoading(false);
-        }, 1000);
+        handleNewModal("checked", "success", "You scored additional 1 point.");
 
-        console.log("&&&&&&", verseId);
+        setTotalPoints(totalPoints + 1);
+
+        setAnswerStatus(1);
       } else {
         setAnswerStatus(2);
-        console.log("#####", verseId);
       }
     }
   };
   const handleNext = () => {
+    if (questionNumber == 10) {
+      handleNewModal(
+        "exclamation",
+        "info",
+        `The total Score is ${totalPoints}`
+      );
+      return;
+    }
     getQuestion();
     setQuestionNumber(questionNumber + 1);
     setAnswerStatus(0);
@@ -144,9 +153,6 @@ export default function Main() {
 
   useEffect(() => {
     getQuestion();
-
-    setIsBrowser(typeof window !== "undefined");
-    console.log("`````4444`````", typeof window);
   }, [lang, section]);
 
   return (
@@ -164,7 +170,7 @@ export default function Main() {
           </MDBSpinner>
         </div>
       ) : (
-        <>
+        <div>
           <MDBTypography
             tag={"h2"}
             className="text-center"
@@ -187,7 +193,7 @@ export default function Main() {
                 </MDBSpinner>
               </div>
             ) : (
-              <>
+              <div>
                 {questionType === 0 ? (
                   <MDBCardBody>
                     <MDBCardTitle>
@@ -203,7 +209,6 @@ export default function Main() {
                             label={one.name}
                             onChange={(_, e) => {
                               setSelectedOption(one.bookid);
-                              console.log("00000", one.bookid, bookId);
                             }}
                             value={one.bookid}
                             checked={one.bookid == selectedOption}
@@ -239,7 +244,6 @@ export default function Main() {
                               label={`Chapter ${index + 1}`}
                               onChange={() => {
                                 setSelectedOption(index + 1);
-                                console.log("111111", index + 1, chapterId);
                               }}
                               value={index + 1}
                               checked={index + 1 == selectedOption}
@@ -271,7 +275,6 @@ export default function Main() {
                             label={one.text}
                             onChange={() => {
                               setSelectedOption(one.verse);
-                              console.log("22222", one.verse, verseId);
                             }}
                             value={one.verse}
                             checked={one.verse == selectedOption}
@@ -323,47 +326,41 @@ export default function Main() {
                     )}
                   </div>
                 </MDBCardFooter>
-              </>
+              </div>
             )}
           </MDBCard>
-        </>
+        </div>
       )}
 
-      {isBrowser ? (
+      <div className="d-flex justify-content-center mt-5">
         <MDBModal
-          open={visibleModal}
-          onClose={() => setVisibleModal(false)}
+          animationDirection="right"
+          show={visibleModal}
+          setShow={setVisibleModal}
           tabIndex="-1"
         >
           <MDBModalDialog centered>
             <MDBModalContent>
-              <MDBModalHeader>
-                <MDBModalTitle>Modal title</MDBModalTitle>
-                <MDBBtn
-                  className="btn-close"
-                  color="none"
-                  onClick={toggleModal}
-                ></MDBBtn>
-              </MDBModalHeader>
               <MDBModalBody>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
+                <div className="text-center">
+                  <MDBIcon
+                    fas
+                    icon={modalIcon}
+                    className={`text-${modalColor}`}
+                    style={{ fontSize: "3rem" }}
+                  />
+                </div>
+                <MDBTypography tag={"h3"} className="text-center">
+                  {modalTitle}
+                </MDBTypography>
               </MDBModalBody>
-              <MDBModalFooter>
-                <MDBBtn color="secondary" onClick={toggleModal}>
-                  Close
-                </MDBBtn>
-                <MDBBtn>Save changes</MDBBtn>
+              <MDBModalFooter className="justify-content-center">
+                <MDBBtn onClick={toggleModal}>Close</MDBBtn>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>
         </MDBModal>
-      ) : (
-        <div>hi</div>
-      )}
+      </div>
     </MDBContainer>
   );
 }
