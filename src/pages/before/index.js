@@ -67,7 +67,9 @@ export default function Before(props) {
           setVersionOptions(e.translations);
           setSelectedVersion({});
         }}
-        value={ localStorage.getItem("language") ? selectedLanguage : "Please select"}
+        value={
+          localStorage.getItem("language") ? selectedLanguage : "Please select"
+        }
         required
       />
       {!selectedLanguage.language && (
@@ -85,7 +87,7 @@ export default function Before(props) {
           option.short_name && `${option.short_name} - ${option.full_name}`
         }
         getOptionValue={(option) => option.short_name}
-        value={localStorage.getItem("version-full") ? selectedVersion : "Please select"}
+        value={selectedVersion.short_name ? selectedVersion : "Please select"}
         onChange={(val) => {
           setSelectedVersion(val);
           localStorage.setItem("version-short", val.short_name);
@@ -104,7 +106,11 @@ export default function Before(props) {
         className="mb-4"
         placeholder={"Please select"}
         options={SECTION_DATA}
-        value={localStorage.getItem("section-label") ? selectedSection : "Please select"}
+        value={
+          localStorage.getItem("section-label")
+            ? selectedSection
+            : "Please select"
+        }
         onChange={(val) => {
           setSelectedSection(val);
           localStorage.setItem("section-value", val.value);
