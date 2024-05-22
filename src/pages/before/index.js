@@ -21,17 +21,24 @@ export default function Before(props) {
     setSelectedLanguage({
       language: previewLang,
     });
-    setVersionOptions(
-      LANG_DATA.find((one) => one.language == previewLang).translations
-    );
-    setSelectedVersion({
-      short_name: localStorage.getItem("version-short"),
-      full_name: localStorage.getItem("version-full"),
-    });
-    setSelectedSection({
-      value: localStorage.getItem("section-value"),
-      label: localStorage.getItem("section-label"),
-    });
+
+    if (previewLang) {
+      setVersionOptions(
+        LANG_DATA.find((one) => one.language == previewLang).translations
+      );
+    }
+    if (localStorage.getItem("version-short")) {
+      setSelectedVersion({
+        short_name: localStorage.getItem("version-short"),
+        full_name: localStorage.getItem("version-full"),
+      });
+    }
+    if (localStorage.getItem("section-value")) {
+      setSelectedSection({
+        value: localStorage.getItem("section-value"),
+        label: localStorage.getItem("section-label"),
+      });
+    }
   }, []);
 
   const navigate = useNavigate();
