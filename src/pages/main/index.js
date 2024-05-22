@@ -19,7 +19,7 @@ import {
   MDBModalFooter,
   MDBSpinner,
   MDBCol,
-  MDBRow
+  MDBRow,
 } from "mdb-react-ui-kit";
 
 import { GetRandomChapter, GetBooks } from "src/libs/axios";
@@ -239,37 +239,72 @@ export default function Main() {
                       Select the correct Book where this verse came from.
                     </MDBCardTitle>
                     <MDBCardText>
-                      {bookOptions.length>10 ? (<MDBRow>
-                        <MDBCol size={6}>
-                          {bookOptions.slice(0, (bookOptions.length)/2).map((one,index) => {
-                          return (
-                            <MDBRadio
-                              key={one.bookid}
-                              name="bookOption"
-                              id={one.bookid}
-                              label={one.name}
-                              onChange={(_, e) => {
-                                // console.log("1111", one.bookid, bookId);
-                                setSelectedOption(one.bookid);
-                              }}
-                              value={one.bookid}
-                              checked={one.bookid == selectedOption}
-                              wrapperStyle={
-                                questionType == 0 && answerStatus == 2
-                                  ? one.bookid == selectedOption
-                                    ? { color: "red" }
-                                    : one.bookid == bookId
-                                    ? { color: "green" }
-                                    : { color: "black" }
-                                  : {}
-                              }
-                              disabled={answerStatus}
-                            />
-                          );
-                        })}
-                        </MDBCol>
-                        <MDBCol size={6}>
-                          {bookOptions.slice((bookOptions.length)/2).map((one,index) => {
+                      {bookOptions.length > 10 ? (
+                        <MDBRow>
+                          <MDBCol sm={12} md={6}>
+                            {bookOptions
+                              .slice(0, bookOptions.length / 2)
+                              .map((one, index) => {
+                                return (
+                                  <MDBRadio
+                                    key={one.bookid}
+                                    name="bookOption"
+                                    id={one.bookid}
+                                    label={one.name}
+                                    onChange={(_, e) => {
+                                      // console.log("1111", one.bookid, bookId);
+                                      setSelectedOption(one.bookid);
+                                    }}
+                                    value={one.bookid}
+                                    checked={one.bookid == selectedOption}
+                                    wrapperStyle={
+                                      questionType == 0 && answerStatus == 2
+                                        ? one.bookid == selectedOption
+                                          ? { color: "red" }
+                                          : one.bookid == bookId
+                                          ? { color: "green" }
+                                          : { color: "black" }
+                                        : {}
+                                    }
+                                    disabled={answerStatus}
+                                  />
+                                );
+                              })}
+                          </MDBCol>
+                          <MDBCol sm={12} md={6}>
+                            {bookOptions
+                              .slice(bookOptions.length / 2)
+                              .map((one, index) => {
+                                return (
+                                  <MDBRadio
+                                    key={one.bookid}
+                                    name="bookOption"
+                                    id={one.bookid}
+                                    label={one.name}
+                                    onChange={(_, e) => {
+                                      // console.log("1111", one.bookid, bookId);
+                                      setSelectedOption(one.bookid);
+                                    }}
+                                    value={one.bookid}
+                                    checked={one.bookid == selectedOption}
+                                    wrapperStyle={
+                                      questionType == 0 && answerStatus == 2
+                                        ? one.bookid == selectedOption
+                                          ? { color: "red" }
+                                          : one.bookid == bookId
+                                          ? { color: "green" }
+                                          : { color: "black" }
+                                        : {}
+                                    }
+                                    disabled={answerStatus}
+                                  />
+                                );
+                              })}
+                          </MDBCol>
+                        </MDBRow>
+                      ) : (
+                        <MDBRow>
+                          {bookOptions.map((one, index) => {
                             return (
                               <MDBRadio
                                 key={one.bookid}
@@ -295,38 +330,8 @@ export default function Main() {
                               />
                             );
                           })}
-                        </MDBCol>
-                      </MDBRow>) : (<MDBRow>
-                        <MDBCol size={6}>
-                          {bookOptions.map((one,index) => {
-                            return (
-                              <MDBRadio
-                                key={one.bookid}
-                                name="bookOption"
-                                id={one.bookid}
-                                label={one.name}
-                                onChange={(_, e) => {
-                                  // console.log("1111", one.bookid, bookId);
-                                  setSelectedOption(one.bookid);
-                                }}
-                                value={one.bookid}
-                                checked={one.bookid == selectedOption}
-                                wrapperStyle={
-                                  questionType == 0 && answerStatus == 2
-                                    ? one.bookid == selectedOption
-                                      ? { color: "red" }
-                                      : one.bookid == bookId
-                                      ? { color: "green" }
-                                      : { color: "black" }
-                                    : {}
-                                }
-                                disabled={answerStatus}
-                              />
-                            );
-                          })}
-                        </MDBCol>
-                      </MDBRow>
-                      ) }
+                        </MDBRow>
+                      )}
                     </MDBCardText>
                   </MDBCardBody>
                 ) : questionType === 1 ? (
