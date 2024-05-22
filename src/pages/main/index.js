@@ -63,6 +63,25 @@ export default function Main() {
     setVisibleModal(true);
   };
 
+  const getScoreMessage = (score) => {
+    let message = "";
+    switch (true) {
+      case score == 0:
+        message = `Your Total Score is ${score}. <br /> Better luck next time`;
+        break;
+      case score > 0 && score < 4:
+        message = `Your Total Score is ${score}. <br /> Keep up the good work!`;
+        break;
+      case score > 3 && score < 11:
+        message = `Your Total Score is ${score}. <br /> This is some excellent stuff!`;
+        break;
+      default:
+        message = `Your Total Score is ${score}.`;
+        break;
+    }
+    return message;
+  };
+
   const getQuestion = async () => {
     bookRange = section.split("-").map((one) => +one);
     bookId = getRandomNumber(bookRange[0], bookRange[1]);
@@ -103,11 +122,7 @@ export default function Main() {
       } else {
         setAnswerStatus(2);
         if (questionNumber == PROBLEM_NUM) {
-          handleNewModal(
-            "exclamation",
-            "info",
-            `The total Score is ${totalPoints}`
-          );
+          handleNewModal("exclamation", "info", getScoreMessage(totalPoints));
           return;
         }
       }
@@ -127,11 +142,7 @@ export default function Main() {
       } else {
         setAnswerStatus(2);
         if (questionNumber == PROBLEM_NUM) {
-          handleNewModal(
-            "exclamation",
-            "info",
-            `The total Score is ${totalPoints}`
-          );
+          handleNewModal("exclamation", "info", getScoreMessage(totalPoints));
           return;
         }
       }
@@ -149,18 +160,14 @@ export default function Main() {
           handleNewModal(
             "exclamation",
             "info",
-            `The total Score is ${totalPoints + 1}`
+            getScoreMessage(totalPoints + 1)
           );
           return;
         }
       } else {
         setAnswerStatus(2);
         if (questionNumber == PROBLEM_NUM) {
-          handleNewModal(
-            "exclamation",
-            "info",
-            `The total Score is ${totalPoints}`
-          );
+          handleNewModal("exclamation", "info", getScoreMessage(totalPoints));
           return;
         }
       }
@@ -168,11 +175,7 @@ export default function Main() {
   };
   const handleNext = () => {
     if (questionNumber == PROBLEM_NUM) {
-      handleNewModal(
-        "exclamation",
-        "info",
-        `The total Score is ${totalPoints}`
-      );
+      handleNewModal("exclamation", "info", getScoreMessage(totalPoints));
       return;
     }
     getQuestion();
@@ -410,9 +413,11 @@ export default function Main() {
                     style={{ fontSize: "3rem" }}
                   />
                 </div>
-                <MDBTypography tag={"h3"} className="text-center">
-                  {modalTitle}
-                </MDBTypography>
+                <MDBTypography
+                  tag={"h3"}
+                  className="text-center"
+                  dangerouslySetInnerHTML={{ __html: modalTitle }}
+                ></MDBTypography>
               </MDBModalBody>
               <MDBModalFooter className="justify-content-center">
                 <MDBBtn onClick={toggleModal}>Close</MDBBtn>
