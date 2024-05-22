@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, version } from "react";
 import { MDBBtn, MDBContainer, MDBTypography } from "mdb-react-ui-kit";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
@@ -57,6 +57,7 @@ export default function Before(props) {
       </label>
       <Select
         className="mb-1"
+        placeholder={"Please select"}
         options={LANG_DATA}
         getOptionLabel={(option) => option.language}
         getOptionValue={(option) => option.language}
@@ -66,7 +67,7 @@ export default function Before(props) {
           setVersionOptions(e.translations);
           setSelectedVersion({});
         }}
-        value={selectedLanguage}
+        value={ localStorage.getItem("language") ? selectedLanguage : "Please select"}
         required
       />
       {!selectedLanguage.language && (
@@ -78,12 +79,13 @@ export default function Before(props) {
       </label>
       <Select
         className="mb-4"
+        placeholder={"Please select"}
         options={versionOptions}
         getOptionLabel={(option) =>
           option.short_name && `${option.short_name} - ${option.full_name}`
         }
         getOptionValue={(option) => option.short_name}
-        value={selectedVersion}
+        value={localStorage.getItem("version-full") ? selectedVersion : "Please select"}
         onChange={(val) => {
           setSelectedVersion(val);
           localStorage.setItem("version-short", val.short_name);
@@ -100,8 +102,9 @@ export default function Before(props) {
       </label>
       <Select
         className="mb-4"
+        placeholder={"Please select"}
         options={SECTION_DATA}
-        value={selectedSection}
+        value={localStorage.getItem("section-label") ? selectedSection : "Please select"}
         onChange={(val) => {
           setSelectedSection(val);
           localStorage.setItem("section-value", val.value);

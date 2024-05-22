@@ -100,7 +100,7 @@ export default function Main() {
     const booksOfSection = allBooksSection.filter(
       (one) => one.bookid >= bookRange[0] && one.bookid <= bookRange[1]
     );
-    booksOfSection.sort((a, b) => 0.5 - Math.random());
+    // booksOfSection.sort((a, b) => 0.5 - Math.random());
     setBookOptions(booksOfSection);
     setIsLoading(false);
   };
@@ -195,7 +195,7 @@ export default function Main() {
 
   return (
     <MDBContainer className="pt-5 main-page">
-      <MDBTypography tag={"h2"} className="text-center">
+      <MDBTypography tag={"h2"} className="text-center fw-bold">
         Question {questionNumber}
       </MDBTypography>
       {isLoading ? (
@@ -210,7 +210,7 @@ export default function Main() {
       ) : (
         <div>
           <MDBTypography
-            tag={"h2"}
+            tag={"h4"}
             className="text-center"
             dangerouslySetInnerHTML={{ __html: randomVerse.text }}
           ></MDBTypography>
@@ -239,6 +239,7 @@ export default function Main() {
                     </MDBCardTitle>
                     <MDBCardText>
                       {bookOptions.map((one) => {
+                        console.log(one)
                         return (
                           <MDBRadio
                             key={one.bookid}
