@@ -16,6 +16,7 @@ import Range from "./components/range/Range";
 
 import BeforePage from "./pages/before";
 import MainPage from "./pages/main";
+import InstructionPage from "./pages/instruction";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -29,6 +30,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/before" element={<BeforePage />} />
         <Route path="/main/:lang/:section" element={<MainPage />} />
+        <Route path="/instruction" element={<InstructionPage />} />
 
         <Route path="/basic" element={<Basic />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />
