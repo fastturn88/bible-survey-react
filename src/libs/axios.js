@@ -34,6 +34,7 @@ export const GetBooks = (lang) => {
     instance
       .get(`/get-books/${lang}/`)
       .then((res) => {
+        console.log(res.data)
         resolve(res.data);
       })
       .catch((err) => {
