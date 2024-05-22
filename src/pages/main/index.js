@@ -333,10 +333,10 @@ export default function Main() {
                   </MDBCardBody>
                 )}
                 <MDBCardFooter>
-                  <div className="d-flex justify-content-between text-center">
+                  <div className="d-flex flex-wrap justify-content-evenly text-center">
                     <MDBBtn
                       outline
-                      className="mx-2"
+                      className="m-2"
                       color="warning"
                       onClick={() => {
                         navigate("/before");
@@ -346,7 +346,7 @@ export default function Main() {
                     </MDBBtn>
                     <MDBBtn
                       outline
-                      className="mx-2"
+                      className="m-2"
                       onClick={handleSubmitAnswer}
                       style={
                         !answerStatus
@@ -358,7 +358,7 @@ export default function Main() {
                     </MDBBtn>
                     <MDBBtn
                       outline
-                      className="mx-2"
+                      className="m-2"
                       color="info"
                       onClick={handleNext}
                       style={
@@ -371,7 +371,7 @@ export default function Main() {
                     </MDBBtn>
                     <MDBBtn
                       outline
-                      className="mx-2"
+                      className="m-2"
                       color="secondary"
                       onClick={() => {
                         navigate("/");
