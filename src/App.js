@@ -29,13 +29,19 @@ export default function App() {
           md={5}
           sm={12}
         >
-          <Link to="/before">
-            <div className="start-page-content">
-              S T A R T
-              <MDBIcon fas className="ms-3" icon="arrow-right" />
-            </div>
-            {/* <MDBBtn className="m-3 ">START</MDBBtn> */}
-          </Link>
+          <div className="text-center">
+            <Link to="/before">
+              <div className="start-page-content">
+                S T A R T
+                <MDBIcon fas className="ms-3" icon="arrow-right" />
+              </div>
+              {/* <MDBBtn className="m-3 ">START</MDBBtn> */}
+            </Link>
+            <Link to="/instruction" className="mt-2 text-dark">
+              Instruction
+              <MDBIcon fas className="ms-2" icon="question" />
+            </Link>
+          </div>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
