@@ -71,7 +71,7 @@ export default function Main() {
 
     setIsLoading(true);
     const randomChapterVerses = await GetRandomChapter(lang, bookId, chapterId);
-    randomChapterVerses.sort((a, b) => 0.5 - Math.random());
+    // randomChapterVerses.sort((a, b) => 0.5 - Math.random());
     setVerseOptions(randomChapterVerses);
     verseId = getRandomNumber(0, randomChapterVerses.length - 1);
     setRandomVerse(randomChapterVerses[verseId]);
@@ -309,7 +309,7 @@ export default function Main() {
                             key={one.pk}
                             name="verseOption"
                             id={one.verse}
-                            label={one.text}
+                            label={one.verse}
                             onChange={() => {
                               // console.log("333333", one.verse, verseId);
                               setSelectedOption(one.verse);
