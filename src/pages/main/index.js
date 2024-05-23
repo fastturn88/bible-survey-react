@@ -243,7 +243,7 @@ export default function Main() {
                         <MDBRow>
                           <MDBCol sm={12} md={6}>
                             {bookOptions
-                              .slice(0, Math.round(verseOptions.length/2))
+                              .slice(0, Math.round(bookOptions.length/2))
                               .map((one, index) => {
                                 return (
                                   <MDBRadio
@@ -252,17 +252,26 @@ export default function Main() {
                                     id={one.bookid}
                                     label={one.name}
                                     onChange={(_, e) => {
-                                      console.log("1111", one.bookid, bookId);
+                                      // console.log("1111", one.bookid, bookId);
                                       setSelectedOption(one.bookid);
                                     }}
                                     value={one.bookid}
                                     checked={one.bookid == selectedOption}
+                                    labelStyle={
+                                      questionType == 0 && answerStatus == 2 
+                                      ? (one.bookid === selectedOption 
+                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        : one.bookid == bookId 
+                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          : {}) 
+                                        : ({})
+                                    }
                                     wrapperStyle={
                                       questionType == 0 && answerStatus == 2
                                         ? one.bookid == selectedOption
                                           ? { color: "red" }
                                           : one.bookid == bookId
-                                          ? { color: "green" }
+                                          ? {fontWeight: 'bold', color: "green" }
                                           : { color: "black" }
                                         : {}
                                     }
@@ -273,7 +282,7 @@ export default function Main() {
                           </MDBCol>
                           <MDBCol sm={12} md={6}>
                             {bookOptions
-                              .slice(Math.round(verseOptions.length/2))
+                              .slice(Math.round(bookOptions.length/2))
                               .map((one, index) => {
                                 return (
                                   <MDBRadio
@@ -282,17 +291,26 @@ export default function Main() {
                                     id={one.bookid}
                                     label={one.name}
                                     onChange={(_, e) => {
-                                      console.log("1111", one.bookid, bookId);
+                                      // console.log("1111", one.bookid, bookId);
                                       setSelectedOption(one.bookid);
                                     }}
                                     value={one.bookid}
                                     checked={one.bookid == selectedOption}
+                                    labelStyle={
+                                      questionType == 0 && answerStatus == 2 
+                                      ? (one.bookid === selectedOption 
+                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        : one.bookid == bookId 
+                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          : {}) 
+                                        : ({})
+                                    }
                                     wrapperStyle={
                                       questionType == 0 && answerStatus == 2
                                         ? one.bookid == selectedOption
                                           ? { color: "red" }
                                           : one.bookid == bookId
-                                          ? { color: "green" }
+                                          ? { color: "green", fontWeight: 'bolder' }
                                           : { color: "black" }
                                         : {}
                                     }
@@ -312,17 +330,26 @@ export default function Main() {
                                 id={one.bookid}
                                 label={one.name}
                                 onChange={(_, e) => {
-                                  console.log("1111", one.bookid, bookId);
+                                  // console.log("1111", one.bookid, bookId);
                                   setSelectedOption(one.bookid);
                                 }}
                                 value={one.bookid}
                                 checked={one.bookid == selectedOption}
+                                labelStyle={
+                                  questionType == 0 && answerStatus == 2 
+                                  ? (one.bookid === selectedOption 
+                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    : one.bookid == bookId 
+                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      : {}) 
+                                    : ({})
+                                }
                                 wrapperStyle={
                                   questionType == 0 && answerStatus == 2
                                     ? one.bookid == selectedOption
                                       ? { color: "red" }
                                       : one.bookid == bookId
-                                      ? { color: "green" }
+                                      ? { color: "green"}
                                       : { color: "black" }
                                     : {}
                                 }
@@ -353,11 +380,20 @@ export default function Main() {
                                     id={index + 1}
                                     label={`Chapter ${index + 1}`}
                                     onChange={() => {
-                                      console.log("2222", index + 1, chapterId);
+                                      // console.log("2222", index + 1, chapterId);
                                       setSelectedOption(index + 1);
                                     }}
                                     value={index + 1}
                                     checked={index + 1 == selectedOption}
+                                    labelStyle={
+                                      questionType == 1 && answerStatus == 2 
+                                      ? (index + 1 === selectedOption 
+                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        : index + 1 == chapterId 
+                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          : {}) 
+                                        : ({})
+                                    }
                                     wrapperStyle={
                                       questionType == 1 && answerStatus == 2
                                         ? index + 1 == selectedOption
@@ -376,24 +412,33 @@ export default function Main() {
                           <MDBCol sm={12} md={6}>
                             {Array(Math.round(chapterRange/2))
                                 .fill(0)
-                                .map((one, index) => {
+                                .map((one, index ) => {
                                   return (
                                     <MDBRadio
-                                      key={index + 1}
+                                      key={Math.round(chapterRange/2)+index+1}
                                       name="bookOption"
-                                      id={index + 1}
+                                      id={Math.round(chapterRange/2)+index+1}
                                       label={`Chapter ${Math.round(chapterRange/2)+ index + 1}`}
                                       onChange={() => {
-                                        console.log("2222", index + 1, chapterId);
-                                        setSelectedOption(index + 1);
+                                        // console.log("2222", index + 1, chapterId);
+                                        setSelectedOption(Math.round(chapterRange/2)+ index + 1);
                                       }}
-                                      value={index + 1}
-                                      checked={index + 1 == selectedOption}
+                                      value={Math.round(chapterRange/2)+ index + 1}
+                                      checked={Math.round(chapterRange/2)+index + 1 == selectedOption}
+                                      labelStyle={
+                                        questionType == 1 && answerStatus == 2 
+                                        ? (index + 1 + Math.round(chapterRange / 2) === selectedOption 
+                                          ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                          : index + 1 + Math.round(chapterRange / 2) == chapterId 
+                                            ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                            : {}) 
+                                          : ({})
+                                      }
                                       wrapperStyle={
                                         questionType == 1 && answerStatus == 2
-                                          ? index + 1 == selectedOption
+                                          ? Math.round(chapterRange/2)+ index + 1 == selectedOption
                                             ? { color: "red" }
-                                            : index + 1 == chapterId
+                                            : Math.round(chapterRange/2)+ index + 1 == chapterId
                                             ? { color: "green" }
                                             : { color: "black" }
                                           : {}
@@ -417,11 +462,20 @@ export default function Main() {
                                     id={index + 1}
                                     label={`Chapter ${index + 1}`}
                                     onChange={() => {
-                                      console.log("2222", index + 1, chapterId);
+                                      // console.log("2222", index + 1, chapterId);
                                       setSelectedOption(index + 1);
                                     }}
                                     value={index + 1}
                                     checked={index + 1 == selectedOption}
+                                    labelStyle={
+                                      questionType == 1 && answerStatus == 2 
+                                      ? (index + 1 === selectedOption 
+                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        : index + 1 == chapterId 
+                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          : {}) 
+                                        : ({})
+                                    }
                                     wrapperStyle={
                                       questionType == 1 && answerStatus == 2
                                         ? index + 1 == selectedOption
@@ -455,11 +509,20 @@ export default function Main() {
                               id={one.verse}
                               label={one.verse}
                               onChange={() => {
-                                console.log("333333", one.verse, verseId);
+                                // console.log("333333", one.verse, verseId);
                                 setSelectedOption(one.verse);
                               }}
                               value={one.verse}
                               checked={one.verse == selectedOption}
+                              labelStyle={
+                                questionType == 2 && answerStatus == 2 
+                                ? (one.verse === selectedOption 
+                                  ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                  : one.verse == verseId 
+                                    ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                    : {}) 
+                                  : ({})
+                              }
                               wrapperStyle={
                                 questionType == 2 && answerStatus == 2
                                   ? one.verse == selectedOption
@@ -483,11 +546,20 @@ export default function Main() {
                                 id={one.verse}
                                 label={one.verse}
                                 onChange={() => {
-                                  console.log("333333", one.verse, verseId);
+                                  // console.log("333333", one.verse, verseId);
                                   setSelectedOption(one.verse);
                                 }}
                                 value={one.verse}
                                 checked={one.verse == selectedOption}
+                                labelStyle={
+                                  questionType == 2 && answerStatus == 2 
+                                  ? (one.verse === selectedOption 
+                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    : one.verse == verseId 
+                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      : {}) 
+                                    : ({})
+                                }
                                 wrapperStyle={
                                   questionType == 2 && answerStatus == 2
                                     ? one.verse == selectedOption
@@ -511,11 +583,20 @@ export default function Main() {
                                 id={one.verse}
                                 label={one.verse}
                                 onChange={() => {
-                                  console.log("333333", one.verse, verseId);
+                                  // console.log("333333", one.verse, verseId);
                                   setSelectedOption(one.verse);
                                 }}
                                 value={one.verse}
                                 checked={one.verse == selectedOption}
+                                labelStyle={
+                                  questionType == 2 && answerStatus == 2 
+                                  ? (one.verse === selectedOption 
+                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    : one.verse == verseId 
+                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      : {}) 
+                                    : ({})
+                                }
                                 wrapperStyle={
                                   questionType == 2 && answerStatus == 2
                                     ? one.verse == selectedOption
