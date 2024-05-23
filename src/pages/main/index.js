@@ -26,6 +26,8 @@ import { GetRandomChapter, GetBooks } from "src/libs/axios";
 import getRandomNumber from "src/libs/getRandomNumber";
 import BooksData from "src/consts/BooksData.json";
 
+import './styles.css'
+
 let bookRange = [];
 let bookId, chapterRange, chapterId, verseId;
 
@@ -63,7 +65,7 @@ export default function Main() {
 
     setVisibleModal(true);
   };
-
+  
   const getScoreMessage = (score) => {
     let message = "";
     switch (true) {
@@ -241,7 +243,7 @@ export default function Main() {
                     <MDBCardText>
                       {bookOptions.length > 10 ? (
                         <MDBRow>
-                          <MDBCol sm={12} md={6}>
+                          <MDBCol sm={6} md={6}>
                             {bookOptions
                               .slice(0, Math.round(bookOptions.length/2))
                               .map((one, index) => {
@@ -260,9 +262,9 @@ export default function Main() {
                                     labelStyle={
                                       questionType == 0 && answerStatus == 2 
                                       ? (one.bookid === selectedOption 
-                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        ? ({ textDecoration: 'line-through', }) 
                                         : one.bookid == bookId 
-                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          ? ({ })
                                           : {}) 
                                         : ({})
                                     }
@@ -280,7 +282,7 @@ export default function Main() {
                                 );
                               })}
                           </MDBCol>
-                          <MDBCol sm={12} md={6}>
+                          <MDBCol sm={6} md={6}>
                             {bookOptions
                               .slice(Math.round(bookOptions.length/2))
                               .map((one, index) => {
@@ -299,9 +301,9 @@ export default function Main() {
                                     labelStyle={
                                       questionType == 0 && answerStatus == 2 
                                       ? (one.bookid === selectedOption 
-                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        ? ({ textDecoration: 'line-through', }) 
                                         : one.bookid == bookId 
-                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          ? ({ })
                                           : {}) 
                                         : ({})
                                     }
@@ -338,9 +340,9 @@ export default function Main() {
                                 labelStyle={
                                   questionType == 0 && answerStatus == 2 
                                   ? (one.bookid === selectedOption 
-                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    ? ({ textDecoration: 'line-through', }) 
                                     : one.bookid == bookId 
-                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      ? ({ })
                                       : {}) 
                                     : ({})
                                 }
@@ -368,8 +370,8 @@ export default function Main() {
                     </MDBCardTitle>
                     <MDBCardText>
                       {chapterRange>10 ? (
-                        <MDBRow>
-                          <MDBCol sm={12} md={6}>
+                        <MDBRow className="chapterOptions">
+                          <MDBCol sm={6}>
                             {Array(Math.round(chapterRange/2) )
                               .fill(0)
                               .map((one, index) => {
@@ -388,9 +390,9 @@ export default function Main() {
                                     labelStyle={
                                       questionType == 1 && answerStatus == 2 
                                       ? (index + 1 === selectedOption 
-                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        ? ({ textDecoration: 'line-through', }) 
                                         : index + 1 == chapterId 
-                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          ? ({ })
                                           : {}) 
                                         : ({})
                                     }
@@ -409,7 +411,7 @@ export default function Main() {
                               })
                             }
                           </MDBCol>
-                          <MDBCol sm={12} md={6}>
+                          <MDBCol sm={6}>
                             {Array(Math.round(chapterRange/2))
                                 .fill(0)
                                 .map((one, index ) => {
@@ -428,9 +430,9 @@ export default function Main() {
                                       labelStyle={
                                         questionType == 1 && answerStatus == 2 
                                         ? (index + 1 + Math.round(chapterRange / 2) === selectedOption 
-                                          ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                          ? ({ textDecoration: 'line-through', }) 
                                           : index + 1 + Math.round(chapterRange / 2) == chapterId 
-                                            ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                            ? ({ })
                                             : {}) 
                                           : ({})
                                       }
@@ -470,9 +472,9 @@ export default function Main() {
                                     labelStyle={
                                       questionType == 1 && answerStatus == 2 
                                       ? (index + 1 === selectedOption 
-                                        ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                        ? ({ textDecoration: 'line-through', }) 
                                         : index + 1 == chapterId 
-                                          ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                          ? ({ })
                                           : {}) 
                                         : ({})
                                     }
@@ -499,8 +501,8 @@ export default function Main() {
                   <MDBCardBody>
                     <MDBCardTitle>Select the correct Verse.</MDBCardTitle>
                     <MDBCardText>
-                      {verseOptions.length >10 ? (<MDBRow>
-                        <MDBCol sm={12} md={6} >
+                      {verseOptions.length >10 ? (<MDBRow className="verseOptions">
+                        <MDBCol sm={6}>
                           {verseOptions.slice(0, Math.round(verseOptions.length/2)).map((one) => {
                           return (
                             <MDBRadio
@@ -517,9 +519,9 @@ export default function Main() {
                               labelStyle={
                                 questionType == 2 && answerStatus == 2 
                                 ? (one.verse === selectedOption 
-                                  ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                  ? ({ textDecoration: 'line-through', }) 
                                   : one.verse == verseId 
-                                    ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                    ? ({ })
                                     : {}) 
                                   : ({})
                               }
@@ -537,7 +539,7 @@ export default function Main() {
                           );
                           })}
                         </MDBCol>
-                        <MDBCol sm={12} md={6}>
+                        <MDBCol sm={6}>
                           {verseOptions.slice(Math.round(verseOptions.length/2)).map((one) => {
                             return (
                               <MDBRadio
@@ -554,9 +556,9 @@ export default function Main() {
                                 labelStyle={
                                   questionType == 2 && answerStatus == 2 
                                   ? (one.verse === selectedOption 
-                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    ? ({ textDecoration: 'line-through', }) 
                                     : one.verse == verseId 
-                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      ? ({ })
                                       : {}) 
                                     : ({})
                                 }
@@ -591,9 +593,9 @@ export default function Main() {
                                 labelStyle={
                                   questionType == 2 && answerStatus == 2 
                                   ? (one.verse === selectedOption 
-                                    ? ({ fontWeight: 'bold', textDecoration: 'line-through', fontSize: '1.2rem'}) 
+                                    ? ({ textDecoration: 'line-through', }) 
                                     : one.verse == verseId 
-                                      ? ({ fontWeight: 'bold', fontSize: '1.2rem'})
+                                      ? ({ })
                                       : {}) 
                                     : ({})
                                 }

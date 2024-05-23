@@ -1,15 +1,8 @@
-.main-page {
-  animation: fadeInAnimation ease 2s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
+@media (max-width: 550px) {
+  .chapterOptions .col-sm-6 {
+    width: 50%;
   }
-
-  100% {
-    opacity: 1;
+  .verseOptions .col-sm-6 {
+    width: 50%;
   }
 }
