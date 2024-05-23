@@ -351,7 +351,7 @@ export default function Main() {
                                     ? one.bookid == selectedOption
                                       ? { color: "red" }
                                       : one.bookid == bookId
-                                      ? { color: "green"}
+                                      ? { color: "green", fontWeight: 'bolder'}
                                       : { color: "black" }
                                     : {}
                                 }
@@ -401,7 +401,7 @@ export default function Main() {
                                         ? index + 1 == selectedOption
                                           ? { color: "red" }
                                           : index + 1 == chapterId
-                                          ? { color: "green" }
+                                          ? { color: "green", fontWeight: 'bolder' }
                                           : { color: "black" }
                                         : {}
                                     }
@@ -441,7 +441,7 @@ export default function Main() {
                                           ? Math.round(chapterRange/2)+ index + 1 == selectedOption
                                             ? { color: "red" }
                                             : Math.round(chapterRange/2)+ index + 1 == chapterId
-                                            ? { color: "green" }
+                                            ? { color: "green", fontWeight: 'bolder' }
                                             : { color: "black" }
                                           : {}
                                       }
@@ -483,7 +483,7 @@ export default function Main() {
                                         ? index + 1 == selectedOption
                                           ? { color: "red" }
                                           : index + 1 == chapterId
-                                          ? { color: "green" }
+                                          ? { color: "green", fontWeight: 'bolder' }
                                           : { color: "black" }
                                         : {}
                                     }
@@ -530,7 +530,7 @@ export default function Main() {
                                   ? one.verse == selectedOption
                                     ? { color: "red" }
                                     : one.verse == verseId
-                                    ? { color: "green" }
+                                    ? { color: "green", fontWeight: 'bolder' }
                                     : { color: "black" }
                                   : {}
                               }
@@ -567,7 +567,7 @@ export default function Main() {
                                     ? one.verse == selectedOption
                                       ? { color: "red" }
                                       : one.verse == verseId
-                                      ? { color: "green" }
+                                      ? { color: "green", fontWeight: 'bolder' }
                                       : { color: "black" }
                                     : {}
                                 }
@@ -604,7 +604,7 @@ export default function Main() {
                                     ? one.verse == selectedOption
                                       ? { color: "red" }
                                       : one.verse == verseId
-                                      ? { color: "green" }
+                                      ? { color: "green", fontWeight: 'bolder' }
                                       : { color: "black" }
                                     : {}
                                 }
